@@ -1,7 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const { googleClientID, googleClientSecret } = require('./config/keys');
+// const { googleClientID, googleClientSecret } = require('./config/keys');
+require('dotenv').config();
 
 const app = express();
 
@@ -10,8 +11,8 @@ passport.use(
     {
       // authorizationURL: 'https://www.google.com/oauth2/authorize',
       // tokenURL: 'https://www.google.com/oauth2/token',
-      clientID: googleClientID,
-      clientSecret: googleClientSecret,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
     },
     function (accessToken, refreshToken, profile, cb) {
